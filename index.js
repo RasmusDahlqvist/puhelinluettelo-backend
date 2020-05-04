@@ -6,6 +6,8 @@ const cors = require('cors')
 app.use(express.json())
 app.use(cors())
 
+app.use(express.static('build'))
+
 morgan.token('body',function(req, res) {
     return JSON.stringify(req.body)
 })
@@ -59,7 +61,7 @@ people
 ${now.toString()} `
 const max = 100000
 
-app.get('/', (req, res) => {
+app.get('/build/index.html', (req, res) => {
     res.send('<h1>Hello World!</h1>')
 })
 
