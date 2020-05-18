@@ -9,7 +9,6 @@ const password = process.argv[2]
 
 const url =
 `mongodb+srv://Rasmus:${password}@cluster0-cisxd.mongodb.net/puhelinluettelo?retryWrites=true&w=majority`
-  
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -22,31 +21,21 @@ const Person = mongoose.model('Person', personSchema)
 
 const person = Person({
   name: process.argv[3],
-  number: process.argv[4],
-  
-})
+  number: process.argv[4], })
 
-if(person.name != undefined && person.number != undefined)
+if(person.name !== undefined && person.number !== undefined)
 
 {
-    person.save().then(response => {
-        console.log(`Added ${person.name} number ${person.number} to phonebook`)
-        mongoose.connection.close()
-      })
+  person.save().then(() => {
+    console.log(`Added ${person.name} number ${person.number} to phonebook`)
+    mongoose.connection.close() })
 
 }
 
-else {
-
-    Person
-    .find({})
-    .then(result => {
-      console.log('phonebook: '); 
-        result.forEach(person => {
-          console.log(person.name, person.number);
-          
-        })
-        mongoose.connection.close()
-})
-
-}
+else { Person
+  .find({})
+  .then(result => {
+    console.log('phonebook: ')
+    result.forEach(person => {
+      console.log(person.name, person.number) })
+    mongoose.connection.close() }) }
