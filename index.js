@@ -1,20 +1,18 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
+
 require('dotenv').config()
 const Person = require('./models/person')
-const morgan = require('morgan')
-const cors = require('cors')
-const bodyParser = require('body-parser')
-
-
-
-
-
-
-app.use(express.json())
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(express.static('build'))
+
+const morgan = require('morgan')
+
+// const bodyParser = require('body-parser')
+// app.use(bodyParser.json())
+
 
 morgan.token('body',function(request, response) {
     return JSON.stringify(request.body)
